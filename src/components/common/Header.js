@@ -1,7 +1,7 @@
 import React from "react";
 import { HiMenuAlt2, HiSearch } from "react-icons/hi";
 
-const Header = () => {
+const Header = ({ handleSearchClick }) => {
   return (
     <header className="relative flex z-10 p-4 lg:p-6 items-center justify-between gap-4">
       <button>
@@ -38,7 +38,7 @@ const Header = () => {
         </li>
       </ul>
 
-      <button>
+      <button onClick={handleSearchClick}>
         <HiSearch className="text-2xl lg:text-3xl text-white transition-all duration-300 hover:text-[#5CA1FF]" />
       </button>
     </header>
