@@ -1,9 +1,11 @@
-function App() {
+import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
+
+export default function App() {
   return (
-    <div className="App">
-      <h1>Hello World</h1>
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<></>} />
+      </Routes>
+    </Router>
   );
 }
-
-export default App;
