@@ -4,9 +4,9 @@ import Slider from "react-slick";
 import MovieCard from "../common/MovieCard";
 import SliderNavButtons from "../common/SliderNavButtons";
 
-const UpcomingMovies = () => {
+const PopularMovies = () => {
   const sliderRef = useRef(null);
-  const [upcomingMovies, setUpcomingMovies] = useState([]);
+  const [popularMovies, setPopularMovies] = useState([]);
 
   const handleNext = () => {
     if (sliderRef.current) {
@@ -70,25 +70,24 @@ const UpcomingMovies = () => {
 
   useEffect(() => {
     axios
-      .get(
-        `https://api.themoviedb.org/3/movie/upcoming?language=en-US&page=1`,
-        {
-          headers: {
-            Authorization: `Bearer ${process.env.REACT_APP_TMDB_API_KEY}`,
-          },
-        }
-      )
+      .get(`https://api.themoviedb.org/3/movie/popular?language=en-US&page=1`, {
+        headers: {
+          Authorization: `Bearer ${process.env.REACT_APP_TMDB_API_KEY}`,
+        },
+      })
       .then((res) => {
-        setUpcomingMovies(res.data.results);
+        setPopularMovies(res.data.results);
       })
       .catch((err) => console.log(err));
   }, []);
+
+  console.log(popularMovies);
 
   return (
     <div className="p-4 lg:p-6 flex flex-col gap-6">
       <div className="flex items-center justify-between gap-4">
         <h1 className="text-lg text-white sm:text-xl font-bold lg:text-2xl">
-          Upcoming Movies
+          Popular Movies
         </h1>
 
         <SliderNavButtons onNext={handleNext} onPrev={handlePrev} />
@@ -96,8 +95,8 @@ const UpcomingMovies = () => {
 
       <div className="">
         <Slider {...settings} ref={sliderRef}>
-          {upcomingMovies.map((movie) => (
-            <MovieCard key={movie.id} movie={movie} type="upcoming" />
+          {popularMovies.map((movie) => (
+            <MovieCard key={movie.id} movie={movie} type="popular" />
           ))}
         </Slider>
       </div>
@@ -105,4 +104,4 @@ const UpcomingMovies = () => {
   );
 };
 
-export default UpcomingMovies;
+export default PopularMovies;

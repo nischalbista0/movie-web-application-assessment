@@ -130,8 +130,8 @@ const HeroSection = () => {
 
       <Header handleSearchClick={handleSearchClick} />
 
-      <div className="p-4 lg:p-6 lg:min-h-[calc(100vh_-_96px)] lg:flex lg:items-center lg:w-full">
-        <div className="slider-container px-10 lg:px-20 relative lg:w-full">
+      <div className="p-4 lg:p-6 min-h-[calc(100vh_-_96px)] flex flex-col justify-center lg:flex-row lg:items-center lg:w-full">
+        <div className="px-10 lg:px-20 relative lg:w-full">
           <Slider {...settings} ref={sliderRef}>
             {movies.map((movie, index) => (
               <HeroMovieDetails key={index} movie={movie} />

@@ -1,9 +1,11 @@
 import React, { useState } from "react";
+import { FaStar } from "react-icons/fa6";
 import { HiInformationCircle } from "react-icons/hi";
+import { IoStatsChart } from "react-icons/io5";
 import { LuView } from "react-icons/lu";
-import { MdLanguage } from "react-icons/md";
+import { MdDateRange, MdLanguage } from "react-icons/md";
 
-const MovieCard = ({ movie }) => {
+const MovieCard = ({ movie, type }) => {
   const [isMovieHovered, setIsMovieHovered] = useState(false);
 
   const changeLanguageCodeToName = (code) => {
@@ -37,11 +39,11 @@ const MovieCard = ({ movie }) => {
               }`}
             >
               <div
-                className={`flex flex-col items-center gap-4 ${
+                className={`flex flex-col items-center gap-4 transition-all duration-500 ${
                   isMovieHovered
                     ? "opacity-100 pointer-events-auto"
                     : "opacity-0 pointer-events-none"
-                } transition-all duration-500
+                } 
               }`}
               >
                 <button className="bg-[#084DB2] rounded-full w-[150px] h-10 flex items-center gap-1.5 justify-center text-white text-sm font-medium">
@@ -61,9 +63,38 @@ const MovieCard = ({ movie }) => {
             <h1 className="text-white text-sm sm:text-base font-bold">
               {movie.title}
             </h1>
-            <p className="text-gray-400 text-xs sm:text-sm">
-              {movie.release_date}
-            </p>
+
+            {type === "upcoming" && (
+              <div className="flex items-center gap-2">
+                <MdDateRange className="text-blue-500 text-base sm:text-lg" />
+
+                <p className="text-white text-xs sm:text-sm relative top-0.5">
+                  {movie.release_date}
+                </p>
+              </div>
+            )}
+
+            {type === "top_rated" && (
+              <div className="flex items-center gap-2">
+                <FaStar className="text-[#FFD700] text-sm sm:text-base" />
+
+                <p className="text-white text-xs sm:text-sm relative top-0.5">
+                  {movie.vote_average.toFixed(2)}/10{" "}
+                  <span className="text-gray-400">({movie.vote_count})</span>
+                </p>
+              </div>
+            )}
+
+            {type === "popular" && (
+              <div className="flex items-center gap-2">
+                <IoStatsChart className="text-green-600 text-sm sm:text-base" />
+
+                <p className="text-white text-xs sm:text-sm relative top-0.5">
+                  {movie.popularity}{" "}
+                  <span className="text-gray-400">points</span>
+                </p>
+              </div>
+            )}
           </div>
         </div>
       </div>
