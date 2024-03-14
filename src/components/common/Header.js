@@ -1,23 +1,99 @@
-import React from "react";
+import React, { useState } from "react";
 import { HiMenuAlt2, HiSearch } from "react-icons/hi";
 
 const Header = ({ handleSearchClick }) => {
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [selected, setSelected] = useState("Now Showing");
+
+  const toggleMenu = () => {
+    setMenuOpen(!menuOpen);
+  };
+
+  const handleMenuClick = (menuItem) => {
+    setSelected(menuItem);
+    setMenuOpen(false);
+  };
+
   return (
     <header className="relative flex z-10 p-4 lg:p-6 items-center justify-between gap-4">
-      <button>
+      <button onClick={toggleMenu} className="relative z-20">
         <HiMenuAlt2 className="text-2xl lg:text-3xl text-white transition-all duration-300 hover:text-[#5CA1FF]" />
       </button>
 
+      <div
+        className={`menu-container z-40 lg:absolute left-0 top-0 w-full min-h-screen bg-[#090e12d6] transition-all duration-300 ${
+          menuOpen
+            ? "opacity-100 pointer-events-auto"
+            : "opacity-0 pointer-events-none"
+        }`}
+      >
+        <div
+          className={`lg:absolute left-0 top-0 min-w-[250px] min-h-screen bg-[#090E12] transition-all duration-300 transform ${
+            menuOpen ? "translate-x-0" : "-translate-x-full"
+          }`}
+        >
+          <button onClick={toggleMenu} className="p-4 lg:p-6">
+            <HiMenuAlt2 className="text-2xl lg:text-3xl text-white transition-all duration-300 hover:text-[#5CA1FF]" />
+          </button>
+
+          <div className="flex flex-col items-center gap-10">
+            <img
+              src="https://www.freeiconspng.com/thumbs/movie-icon/movie-icon-27.png"
+              alt="logo"
+              className="w-12 h-12"
+            />
+
+            <div className="w-full flex flex-col gap-4">
+              <div
+                onClick={() => handleMenuClick("Now Showing")}
+                className={`relative flex font-medium items-center gap-4 cursor-pointer ${
+                  selected === "Now Showing" ? "text-white" : "text-[#919BB4]"
+                } transition-all duration-300`}
+              >
+                <div
+                  className={`w-1.5 h-7 rounded-md bg-[#5CA1FF] ${
+                    selected === "Now Showing" ? "opacity-100" : "opacity-0"
+                  } transition-all duration-300`}
+                ></div>
+
+                <div>Now Showing</div>
+              </div>
+
+              <div
+                onClick={() => handleMenuClick("Upcoming")}
+                className={`relative flex font-medium items-center gap-4 cursor-pointer ${
+                  selected === "Upcoming" ? "text-white" : "text-[#919BB4]"
+                } transition-all duration-300`}
+              >
+                <div
+                  className={`w-1.5 h-7 rounded-md bg-[#5CA1FF] ${
+                    selected === "Upcoming" ? "opacity-100" : "opacity-0"
+                  } transition-all duration-300`}
+                ></div>
+
+                <div>Upcoming</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <ul className="items-center gap-10 hidden lg:flex">
         <li>
-          <a href="#" className="text-white">
+          <div
+            className="text-white cursor-pointer"
+            onClick={() => handleMenuClick("Home")}
+          >
             Home
-          </a>
+          </div>
         </li>
         <li>
-          <a href="#" className="text-white">
+          <div
+            className="text-white cursor-pointer"
+            onClick={() => handleMenuClick("About")}
+          >
             About
-          </a>
+          </div>
         </li>
         <li>
           <img
@@ -27,14 +103,20 @@ const Header = ({ handleSearchClick }) => {
           />
         </li>
         <li>
-          <a href="#" className="text-white">
+          <div
+            className="text-white cursor-pointer"
+            onClick={() => handleMenuClick("Services")}
+          >
             Services
-          </a>
+          </div>
         </li>
         <li>
-          <a href="#" className="text-white">
+          <div
+            className="text-white cursor-pointer"
+            onClick={() => handleMenuClick("Contact")}
+          >
             Contact
-          </a>
+          </div>
         </li>
       </ul>
 
