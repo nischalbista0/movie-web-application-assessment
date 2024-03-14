@@ -4,7 +4,7 @@ import { HiInformationCircle } from "react-icons/hi";
 const HeroMovieDetails = ({ movie, key }) => {
   return (
     <div key={key} className="z-40 w-full h-full">
-      <div className="flex flex-col lg:flex-row items-center gap-4 lg:gap-14 lg:w-full">
+      <div className="flex flex-col items-start lg:flex-row lg:items-center gap-4 lg:gap-14 lg:w-full">
         <div className="w-full lg:w-[30%]">
           <img
             src={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
@@ -19,7 +19,7 @@ const HeroMovieDetails = ({ movie, key }) => {
               {movie.title}
             </h1>
 
-            <p className="text-white">{movie.overview}</p>
+            <p className="text-white hidden lg:block">{movie.overview}</p>
           </div>
 
           <div>
@@ -29,7 +29,7 @@ const HeroMovieDetails = ({ movie, key }) => {
             </button>
           </div>
 
-          <div className="flex gap-10">
+          <div className="flex flex-col lg:flex-row gap-2 lg:gap-10">
             <div className="flex gap-2">
               <p className="text-gray-400">Rating:</p>
               <p className="text-white">{movie.vote_average}/10</p>

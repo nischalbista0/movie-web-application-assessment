@@ -1,7 +1,8 @@
 // HeroSection.js
-import React, { useState, useEffect, useRef } from "react";
-import Slider from "react-slick";
 import axios from "axios";
+import React, { useEffect, useRef, useState } from "react";
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa6";
+import Slider from "react-slick";
 import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.css";
 import Header from "../common/Header";
@@ -53,45 +54,19 @@ const HeroSection = () => {
 
   const CustomNextButtom = () => (
     <button
-      className="absolute top-1/2 -right-16 transform -translate-y-1/2"
+      className="absolute top-1/2 -right-12 lg:-right-16 transform -translate-y-1/2"
       onClick={() => sliderRef.current.slickNext()}
     >
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        className="h-12 w-12 text-white transition-all duration-300 hover:text-[#5CA1FF]"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke="currentColor"
-      >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth={2}
-          d="M9 5l7 7-7 7"
-        />
-      </svg>
+      <FaChevronRight className="text-white text-3xl lg:text-4xl transition-all duration-300 hover:text-[#5CA1FF]" />
     </button>
   );
 
   const CustomPrevButtom = () => (
     <button
-      className="absolute top-1/2 -left-16 transform -translate-y-1/2 -translate-x-4"
+      className="absolute top-1/2 -left-12 lg:-left-16 transform -translate-y-1/2 "
       onClick={() => sliderRef.current.slickPrev()}
     >
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        className="h-12 w-12 text-white transition-all duration-300 hover:text-[#5CA1FF]"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke="currentColor"
-      >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth={2}
-          d="M15 19l-7-7 7-7"
-        />
-      </svg>
+      <FaChevronLeft className="text-white text-3xl lg:text-4xl transition-all duration-300 hover:text-[#5CA1FF]" />
     </button>
   );
 

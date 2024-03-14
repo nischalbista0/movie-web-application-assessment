@@ -21,14 +21,14 @@ const Header = ({ handleSearchClick }) => {
       </button>
 
       <div
-        className={`menu-container z-40 lg:absolute left-0 top-0 w-full min-h-screen bg-[#090e12d6] transition-all duration-300 ${
+        className={`menu-container z-40 absolute left-0 top-0 w-full min-h-screen bg-[#090e12d6] transition-all duration-300 ${
           menuOpen
             ? "opacity-100 pointer-events-auto"
             : "opacity-0 pointer-events-none"
         }`}
       >
         <div
-          className={`lg:absolute left-0 top-0 min-w-[250px] min-h-screen bg-[#090E12] transition-all duration-300 transform ${
+          className={`absolute left-0 top-0 w-[300px] min-h-screen bg-[#090E12] transition-all duration-300 transform ${
             menuOpen ? "translate-x-0" : "-translate-x-full"
           }`}
         >
