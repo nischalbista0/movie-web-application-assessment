@@ -1,5 +1,6 @@
 // HeroSection.js
 import axios from "axios";
+import { atom } from "jotai";
 import React, { useEffect, useRef, useState } from "react";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa6";
 import Slider from "react-slick";
@@ -7,30 +8,13 @@ import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.css";
 import Header from "../common/Header";
 import HeroMovieDetails from "./HeroMovieDetails";
-import SearchModal from "./SearchModal";
+
+export const searchClickedAtom = atom(false);
 
 const HeroSection = () => {
   const sliderRef = useRef(null);
   const [currentSlide, setCurrentSlide] = useState(0);
   const [movies, setMovies] = useState([]);
-  const [searchClicked, setSearchClicked] = useState(false);
-  const [searchValue, setSearchValue] = useState("");
-  const [searchResults, setSearchResults] = useState([]);
-  const [loading, setLoading] = useState(false);
-
-  const handleSearchClick = () => {
-    setSearchClicked(true);
-  };
-
-  const handleBackClick = () => {
-    setSearchClicked(false);
-    setSearchValue("");
-    setSearchResults([]);
-  };
-
-  const handleSearchChange = (e) => {
-    setSearchValue(e.target.value);
-  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -52,7 +36,7 @@ const HeroSection = () => {
     fetchData();
   }, []);
 
-  const CustomNextButtom = () => (
+  const CustomNextButton = () => (
     <button
       className="absolute top-1/2 -right-12 lg:-right-16 transform -translate-y-1/2"
       onClick={() => sliderRef.current.slickNext()}
@@ -61,7 +45,7 @@ const HeroSection = () => {
     </button>
   );
 
-  const CustomPrevButtom = () => (
+  const CustomPrevButton = () => (
     <button
       className="absolute top-1/2 -left-12 lg:-left-16 transform -translate-y-1/2 "
       onClick={() => sliderRef.current.slickPrev()}
@@ -77,9 +61,9 @@ const HeroSection = () => {
     speed: 500,
     autoplay: true,
     fade: true,
-    autoplaySpeed: 4000,
-    nextArrow: <CustomNextButtom />,
-    prevArrow: <CustomPrevButtom />,
+    autoplaySpeed: 5000,
+    nextArrow: <CustomNextButton />,
+    prevArrow: <CustomPrevButton />,
     afterChange: (index) => {
       setCurrentSlide(index);
     },
@@ -113,7 +97,13 @@ const HeroSection = () => {
   if (movies.length === 0) {
     return (
       <div className="bg-[#090E12] w-screen h-screen flex items-center justify-center">
-        <div className="w-16 h-16 border-4 border-[#5CA1FF] rounded-full animate-spin"></div>
+        <div className="w-full h-full flex items-center justify-center">
+          <div className="flex flex-row gap-2">
+            <div className="w-4 h-4 rounded-full bg-blue-700 animate-bounce [animation-delay:.7s]"></div>
+            <div className="w-4 h-4 rounded-full bg-blue-700 animate-bounce [animation-delay:.3s]"></div>
+            <div className="w-4 h-4 rounded-full bg-blue-700 animate-bounce [animation-delay:.7s]"></div>
+          </div>
+        </div>{" "}
       </div>
     );
   }
@@ -122,34 +112,25 @@ const HeroSection = () => {
     <div className="relative w-full min-h-screen bg-[#090E12]">
       <div className="w-full h-full absolute top left-0">
         <img
-          src={`https://image.tmdb.org/t/p/original${movies[currentSlide].poster_path}`}
+          src={`https://image.tmdb.org/t/p/original${movies[currentSlide].backdrop_path}`}
           alt="hero"
-          className="bg-img w-full h-full object-cover opacity-5 transition-all duration-300"
+          className="bg-img w-full h-full object-cover opacity-10 transition-all duration-300"
         />
       </div>
 
-      <Header handleSearchClick={handleSearchClick} />
+      <Header />
 
       <div className="p-4 lg:p-6 min-h-[calc(100vh_-_96px)] flex flex-col justify-center lg:flex-row lg:items-center lg:w-full">
         <div className="px-10 lg:px-20 relative lg:w-full">
           <Slider {...settings} ref={sliderRef}>
             {movies.map((movie, index) => (
-              <HeroMovieDetails key={index} movie={movie} />
+              <div key={index}>
+                <HeroMovieDetails movie={movie} />
+              </div>
             ))}
           </Slider>
         </div>
       </div>
-
-      <SearchModal
-        setSearchResults={setSearchResults}
-        setLoading={setLoading}
-        searchValue={searchValue}
-        searchClicked={searchClicked}
-        handleBackClick={handleBackClick}
-        handleSearchChange={handleSearchChange}
-        searchResults={searchResults}
-        loading={loading}
-      />
     </div>
   );
 };

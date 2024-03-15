@@ -1,17 +1,29 @@
 import axios from "axios";
 import React, { useEffect } from "react";
 import { HiChevronLeft } from "react-icons/hi";
+import { useNavigate } from "react-router-dom";
+
+import { useAtom } from "jotai";
+import { searchClickedAtom } from "./HeroSection";
 
 const SearchModal = ({
   setSearchResults,
   setLoading,
   searchValue,
-  searchClicked,
-  handleBackClick,
   handleSearchChange,
   searchResults,
   loading,
 }) => {
+  const [searchClicked, setSearchClicked] = useAtom(searchClickedAtom);
+  const navigate = useNavigate();
+
+  const handleKeyPress = (event) => {
+    if (event.key === "Enter") {
+      setSearchClicked(false);
+      navigate(`/search?q=${searchValue}`);
+    }
+  };
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -52,7 +64,12 @@ const SearchModal = ({
     >
       <div className="w-full p-4 lg:p-6 h-full">
         <div className="bg-[#090E12] flex items-center gap-2">
-          <button onClick={handleBackClick} className="relative top-2">
+          <button
+            onClick={() => {
+              setSearchClicked(false);
+            }}
+            className="relative top-1.5 border border-gray-400 rounded-md  transition-all duration-300 hover:border-[#5CA1FF] focus:outline-none"
+          >
             <HiChevronLeft className="text-3xl lg:text-4xl text-white transition-all duration-300 hover:text-[#5CA1FF]" />
           </button>
 
@@ -60,9 +77,10 @@ const SearchModal = ({
             <input
               type="text"
               placeholder="Search for movies..."
-              className="w-11/12 h-12 lg:h-16 bg-[#090E12] border-b-2 border-[#5CA1FF] text-white text-lg lg:text-xl focus:outline-none"
+              className="w-[95%] h-12 lg:h-14 bg-[#090E12] border-b-2 border-[#5CA1FF] text-white text-lg lg:text-xl focus:outline-none"
               value={searchValue}
               onChange={handleSearchChange}
+              onKeyDown={handleKeyPress}
             />
           </div>
         </div>

@@ -27,7 +27,7 @@ const UpcomingMovies = () => {
     slidesToShow: 5,
     slidesToScroll: 3,
     autoplay: true,
-    autoplaySpeed: 4000,
+    autoplaySpeed: 5000,
     initialSlide: 0,
     nextArrow: <></>,
     prevArrow: <></>,

@@ -1,9 +1,12 @@
+import { useAtom } from "jotai";
 import React, { useState } from "react";
 import { HiMenuAlt2, HiSearch } from "react-icons/hi";
+import { searchClickedAtom } from "../Homepage/HeroSection";
 
-const Header = ({ handleSearchClick }) => {
+const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [selected, setSelected] = useState("Now Showing");
+  const [searchClicked, setSearchClicked] = useAtom(searchClickedAtom);
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
@@ -120,7 +123,7 @@ const Header = ({ handleSearchClick }) => {
         </li>
       </ul>
 
-      <button onClick={handleSearchClick}>
+      <button onClick={() => setSearchClicked(true)}>
         <HiSearch className="text-2xl lg:text-3xl text-white transition-all duration-300 hover:text-[#5CA1FF]" />
       </button>
     </header>

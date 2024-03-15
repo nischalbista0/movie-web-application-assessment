@@ -6,7 +6,7 @@ import UpcomingMovies from "../components/Homepage/UpcomingMovies";
 
 const Homepage = () => {
   return (
-    <div className="bg-[#080D11]">
+    <div className="bg-[#080D11] overflow-x-hidden">
       <HeroSection />
 
       <div className="py-4">
