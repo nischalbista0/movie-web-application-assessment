@@ -1,12 +1,15 @@
 import { useAtom } from "jotai";
 import React, { useState } from "react";
 import { HiMenuAlt2, HiSearch } from "react-icons/hi";
+import { useNavigate } from "react-router-dom";
 import { searchClickedAtom } from "../Homepage/HeroSection";
 
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [selected, setSelected] = useState("Now Showing");
   const [, setSearchClicked] = useAtom(searchClickedAtom);
+
+  const navigate = useNavigate();
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
@@ -98,7 +101,7 @@ const Header = () => {
             About
           </div>
         </li>
-        <li>
+        <li className="cursor-pointer" onClick={() => navigate("/")}>
           <img
             src="https://www.freeiconspng.com/thumbs/movie-icon/movie-icon-27.png"
             alt="logo"

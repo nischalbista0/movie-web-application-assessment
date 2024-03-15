@@ -7,10 +7,10 @@ import FilterModal from "../components/SearchAndFilter/FilterModal";
 import Header from "../components/common/Header";
 import MovieCard from "../components/common/MovieCard";
 
-const SearchResultsPage = () => {
+const FilterResultsPage = () => {
   const [searchResults, setSearchResults] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [sortBy, setSortBy] = useState("release_date.asc");
+  const [sortBy, setSortBy] = useState("popularity.desc");
   const [showFilterModal, setShowFilterModal] = useState(false);
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
@@ -22,32 +22,19 @@ const SearchResultsPage = () => {
     const fetchSearchResults = async () => {
       setLoading(true);
       try {
-        const response = await axios.get(
-          `https://api.themoviedb.org/3/search/movie?query=${searchQuery}`,
-          {
-            headers: {
-              Authorization: `Bearer ${process.env.REACT_APP_TMDB_API_KEY}`,
-            },
-          }
-        );
-        let filteredResults = response.data.results;
-        // Filter based on genres
-        if (genres) {
-          const selectedGenres = genres.split(",");
-          filteredResults = filteredResults.filter((movie) =>
-            movie.genre_ids.some((genreId) =>
-              selectedGenres.includes(genreId.toString())
-            )
-          );
-        }
-        // Filter based on languages
-        if (languages) {
-          const selectedLanguages = languages.split(",");
-          filteredResults = filteredResults.filter((movie) =>
-            selectedLanguages.includes(movie.original_language)
-          );
-        }
-        setSearchResults(filteredResults);
+        let apiUrl = `https://api.themoviedb.org/3/discover/movie`;
+        const response = await axios.get(apiUrl, {
+          headers: {
+            Authorization: `Bearer ${process.env.REACT_APP_TMDB_API_KEY}`,
+          },
+          params: {
+            query: searchQuery,
+            sort_by: sortBy,
+            with_genres: genres,
+            with_original_language: languages,
+          },
+        });
+        setSearchResults(response.data.results);
         setLoading(false);
       } catch (error) {
         console.error("Error fetching search results:", error);
@@ -55,9 +42,7 @@ const SearchResultsPage = () => {
       }
     };
 
-    if (searchQuery) {
-      fetchSearchResults();
-    }
+    fetchSearchResults();
   }, [searchQuery, sortBy, genres, languages]);
 
   const handleSortChange = (e) => {
@@ -69,12 +54,12 @@ const SearchResultsPage = () => {
   };
 
   const sortOptions = {
+    "Popularity (Ascending)": "popularity.asc",
+    "Popularity (Descending)": "popularity.desc",
     "Release Date (Ascending)": "release_date.asc",
     "Release Date (Descending)": "release_date.desc",
     "Rating (Ascending)": "vote_average.asc",
     "Rating (Descending)": "vote_average.desc",
-    "Popularity (Ascending)": "popularity.asc",
-    "Popularity (Descending)": "popularity.desc",
   };
 
   const sortSearchResults = (results) => {
@@ -99,7 +84,7 @@ const SearchResultsPage = () => {
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center">
               <button
-                onClick={toggleFilterModal} // Toggle filter modal visibility
+                onClick={toggleFilterModal}
                 className="flex items-center gap-1.5 px-4 py-2 bg-gray-800 rounded-full text-white mr-4"
               >
                 <IoFilter className="text-xl" />
@@ -136,14 +121,11 @@ const SearchResultsPage = () => {
             </div>
           )}
           {!loading && searchResults.length === 0 && (
-            <p>No results found for "{searchQuery}"</p>
+            <p className="text-center">No results found </p>
           )}
           {!loading && searchResults.length > 0 && (
             <div>
-              <h1 className="text-2xl font-bold mb-4">
-                Search Results for{" "}
-                <span className="text-[#e2cd59]">"{searchQuery}"</span>
-              </h1>
+              <h1 className="text-2xl font-bold mb-4">Filtered Results</h1>
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-x-2 gap-y-10">
                 {sortSearchResults(searchResults).map((movie) => (
                   <MovieCard key={movie.id} movie={movie} type={"search"} />
@@ -159,4 +141,4 @@ const SearchResultsPage = () => {
   );
 };
 
-export default SearchResultsPage;
+export default FilterResultsPage;

@@ -7,6 +7,7 @@ import {
   selectedMovieAtom,
 } from "./components/common/MovieCard";
 import QuickViewModal from "./components/common/QuickViewModal";
+import FilterResultsPage from "./pages/FilterResultsPage";
 import Homepage from "./pages/Homepage";
 import SearchResultsPage from "./pages/SearchResultsPage";
 
@@ -33,16 +34,13 @@ export default function App() {
     setSearchValue(e.target.value);
   };
 
-  const handleQuickViewClick = () => {
-    setIsQuickViewButtonClicked(true);
-  };
-
   return (
     <div>
       <Router>
         <Routes>
           <Route path="/" element={<Homepage />} />
           <Route path="/search" element={<SearchResultsPage />} />
+          <Route path="/filter" element={<FilterResultsPage />} />
         </Routes>
 
         <SearchModal
