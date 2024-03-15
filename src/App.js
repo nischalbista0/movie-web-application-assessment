@@ -9,6 +9,7 @@ import {
 import QuickViewModal from "./components/common/QuickViewModal";
 import FilterResultsPage from "./pages/FilterResultsPage";
 import Homepage from "./pages/Homepage";
+import MovieDetails from "./pages/MovieDetails";
 import SearchResultsPage from "./pages/SearchResultsPage";
 
 export const apiKey = process.env.REACT_APP_TMDB_API_KEY;
@@ -39,6 +40,7 @@ export default function App() {
       <Router>
         <Routes>
           <Route path="/" element={<Homepage />} />
+          <Route path="/movie/:id" element={<MovieDetails />} />
           <Route path="/search" element={<SearchResultsPage />} />
           <Route path="/filter" element={<FilterResultsPage />} />
         </Routes>

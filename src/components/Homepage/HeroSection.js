@@ -3,6 +3,7 @@ import axios from "axios";
 import { atom } from "jotai";
 import React, { useEffect, useRef, useState } from "react";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa6";
+import { useNavigate } from "react-router-dom";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.css";
@@ -15,6 +16,8 @@ const HeroSection = () => {
   const sliderRef = useRef(null);
   const [currentSlide, setCurrentSlide] = useState(0);
   const [movies, setMovies] = useState([]);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -124,7 +127,7 @@ const HeroSection = () => {
         <div className="px-10 lg:px-20 relative lg:w-full">
           <Slider {...settings} ref={sliderRef}>
             {movies.map((movie, index) => (
-              <div key={index}>
+              <div key={index} onClick={() => navigate(`/movie/${movie.id}`)}>
                 <HeroMovieDetails movie={movie} />
               </div>
             ))}

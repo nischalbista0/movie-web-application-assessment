@@ -5,6 +5,7 @@ import { HiInformationCircle } from "react-icons/hi";
 import { IoStatsChart, IoTimer } from "react-icons/io5";
 import { LuView } from "react-icons/lu";
 import { MdDateRange, MdLanguage } from "react-icons/md";
+import { useNavigate } from "react-router-dom";
 
 export const isQuickViewButtonClickedAtom = atom(false);
 export const selectedMovieAtom = atom(null);
@@ -18,6 +19,8 @@ const MovieCard = ({ movie, type }) => {
     const languageNames = new Intl.DisplayNames(["en"], { type: "language" });
     return languageNames.of(code);
   };
+
+  const navigate = useNavigate();
 
   return (
     <div className="relative z-0 px-2 lg:px-3">
@@ -56,7 +59,10 @@ const MovieCard = ({ movie, type }) => {
                 } 
               }`}
               >
-                <button className="bg-[#084DB2] rounded-full w-[150px] h-10 flex items-center gap-1.5 justify-center text-white text-sm font-medium">
+                <button
+                  className="bg-[#084DB2] rounded-full w-[150px] h-10 flex items-center gap-1.5 justify-center text-white text-sm font-medium"
+                  onClick={() => navigate(`/movie/${movie.id}`)}
+                >
                   <HiInformationCircle className="text-xl" />
                   View Details
                 </button>
