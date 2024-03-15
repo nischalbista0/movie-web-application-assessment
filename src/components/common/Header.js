@@ -6,7 +6,7 @@ import { searchClickedAtom } from "../Homepage/HeroSection";
 
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [selected, setSelected] = useState("Now Showing");
+  const [selected, setSelected] = useState("home");
   const [, setSearchClicked] = useAtom(searchClickedAtom);
 
   const navigate = useNavigate();
@@ -51,18 +51,18 @@ const Header = () => {
 
             <div className="w-full flex flex-col gap-4">
               <div
-                onClick={() => handleMenuClick("Now Showing")}
+                onClick={() => handleMenuClick("home")}
                 className={`relative flex font-medium items-center gap-4 cursor-pointer ${
-                  selected === "Now Showing" ? "text-white" : "text-[#919BB4]"
+                  selected === "home" ? "text-white" : "text-[#919BB4]"
                 } transition-all duration-300`}
               >
                 <div
                   className={`w-1.5 h-7 rounded-md bg-[#5CA1FF] ${
-                    selected === "Now Showing" ? "opacity-100" : "opacity-0"
+                    selected === "home" ? "opacity-100" : "opacity-0"
                   } transition-all duration-300`}
                 ></div>
 
-                <div>Now Showing</div>
+                <div>Home</div>
               </div>
 
               <div
@@ -78,6 +78,21 @@ const Header = () => {
                 ></div>
 
                 <div>Upcoming</div>
+              </div>
+
+              <div
+                onClick={() => handleMenuClick("Popular")}
+                className={`relative flex font-medium items-center gap-4 cursor-pointer ${
+                  selected === "Popular" ? "text-white" : "text-[#919BB4]"
+                } transition-all duration-300`}
+              >
+                <div
+                  className={`w-1.5 h-7 rounded-md bg-[#5CA1FF] ${
+                    selected === "Popular" ? "opacity-100" : "opacity-0"
+                  } transition-all duration-300`}
+                ></div>
+
+                <div>Popular</div>
               </div>
 
               <div

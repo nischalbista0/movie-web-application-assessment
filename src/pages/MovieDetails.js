@@ -17,6 +17,7 @@ const MovieDetails = ({ match }) => {
   const [movieDetails, setMovieDetails] = useState(null);
   const [movieCredits, setMovieCredits] = useState([]);
   const [movieImages, setMovieImages] = useState([]);
+  const [showAllCast, setShowAllCast] = useState(false);
 
   const carouselRef = useRef(null);
 
@@ -78,6 +79,10 @@ const MovieDetails = ({ match }) => {
     fetchMovieImages();
   }, [id]);
 
+  const toggleShowAllCast = () => {
+    setShowAllCast(!showAllCast);
+  };
+
   if (!movieDetails || movieCredits.length === 0) {
     return (
       <div className="bg-[#090E12] w-screen h-screen flex items-center justify-center">
@@ -122,16 +127,14 @@ const MovieDetails = ({ match }) => {
             />
           </div>
 
-          <div className="flex flex-col gap-8">
+          <div className="flex flex-col gap-8 self-start lg:self-center">
             <div className="flex flex-col gap-2 lg:gap-6">
               <h1 className="text-2xl lg:text-3xl font-bold text-white">
                 {movieDetails.title}
               </h1>
 
               {movieDetails.overview && (
-                <p className="text-white hidden lg:block">
-                  {movieDetails.overview}
-                </p>
+                <p className="text-white block">{movieDetails.overview}</p>
               )}
 
               {movieDetails.tagline && (
@@ -291,29 +294,68 @@ const MovieDetails = ({ match }) => {
           <div className=" text-white flex flex-col gap-2">
             <h1 className="text-gray-400 font-bold text-lg">Cast</h1>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-              {movieCredits.map((credit) => (
-                <div
-                  key={credit.id}
-                  className="bg-gray-800 p-4 rounded-lg flex items-center"
-                >
-                  {credit.profile_path ? (
-                    <img
-                      src={`https://image.tmdb.org/t/p/w200${credit.profile_path}`}
-                      alt={credit.name}
-                      className="w-12 h-12 rounded-full mr-2"
-                    />
-                  ) : (
-                    <div className="w-12 h-12 rounded-full bg-gray-600 flex items-center justify-center mr-2">
-                      <AiOutlineUser className="text-2xl" />
+              {showAllCast
+                ? movieCredits.map((credit) => (
+                    <div
+                      key={credit.id}
+                      className="bg-gray-800 p-4 rounded-lg flex items-center"
+                    >
+                      {credit.profile_path ? (
+                        <img
+                          src={`https://image.tmdb.org/t/p/w200${credit.profile_path}`}
+                          alt={credit.name}
+                          className="w-12 h-12 rounded-full mr-2"
+                        />
+                      ) : (
+                        <div className="w-12 h-12 rounded-full bg-gray-600 flex items-center justify-center mr-2">
+                          <AiOutlineUser className="text-2xl" />
+                        </div>
+                      )}
+                      <div>
+                        <h3 className="text-lg font-semibold">{credit.name}</h3>
+                        <p className="text-gray-400">{credit.character}</p>
+                      </div>
                     </div>
-                  )}
-                  <div>
-                    <h3 className="text-lg font-semibold">{credit.name}</h3>
-                    <p className="text-gray-400">{credit.character}</p>
-                  </div>
-                </div>
-              ))}
+                  ))
+                : movieCredits.slice(0, 20).map((credit) => (
+                    <div
+                      key={credit.id}
+                      className="bg-gray-800 p-4 rounded-lg flex items-center"
+                    >
+                      {credit.profile_path ? (
+                        <img
+                          src={`https://image.tmdb.org/t/p/w200${credit.profile_path}`}
+                          alt={credit.name}
+                          className="w-12 h-12 rounded-full mr-2"
+                        />
+                      ) : (
+                        <div className="w-12 h-12 rounded-full bg-gray-600 flex items-center justify-center mr-2">
+                          <AiOutlineUser className="text-2xl" />
+                        </div>
+                      )}
+                      <div>
+                        <h3 className="text-lg font-semibold">{credit.name}</h3>
+                        <p className="text-gray-400">{credit.character}</p>
+                      </div>
+                    </div>
+                  ))}
             </div>
+            {!showAllCast && movieCredits.length > 4 && (
+              <button
+                onClick={toggleShowAllCast}
+                className="text-blue-500 hover:text-white transition-all duration-300"
+              >
+                Show All
+              </button>
+            )}
+            {showAllCast && (
+              <button
+                onClick={toggleShowAllCast}
+                className="text-blue-500 hover:text-white transition-all duration-300"
+              >
+                Show Less
+              </button>
+            )}
           </div>
 
           <div className="h-[700px] flex flex-col gap-4">
