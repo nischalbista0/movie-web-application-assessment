@@ -164,7 +164,7 @@ const MovieDetails = ({ match }) => {
               )}
 
               {movieDetails.revenue && (
-                <div className="flex gap-2">
+                <div className="flex items-center gap-2">
                   <GiCash className="text-gray-400 text-xl" />
                   <p className="text-white">
                     Revenue: ${movieDetails.revenue.toLocaleString()}
@@ -173,11 +173,10 @@ const MovieDetails = ({ match }) => {
               )}
 
               {movieDetails.homepage && (
-                <div className="flex gap-2">
+                <div className="flex items-center gap-2">
                   <FaGlobe className="text-gray-400 text-xl" />
 
                   <div className="flex items-center gap-1">
-                    <p className="text-white">Website:</p>
                     <a
                       href={movieDetails.homepage}
                       target="_blank"
@@ -193,7 +192,7 @@ const MovieDetails = ({ match }) => {
               <div className="flex items-center gap-2">
                 <IoStatsChart className="text-green-600 text-sm sm:text-base" />
 
-                <p className="text-white text-xs sm:text-sm relative top-0.5">
+                <p className="text-white text-[13px] sm:text-sm relative top-0.5">
                   {movieDetails.popularity}{" "}
                   <span className="text-gray-400">points</span>
                 </p>
@@ -202,7 +201,7 @@ const MovieDetails = ({ match }) => {
               <div className="flex items-center gap-2">
                 <FaStar className="text-[#FFD700] text-sm sm:text-base" />
 
-                <p className="text-white text-xs sm:text-sm relative top-0.5">
+                <p className="text-white text-[13px] sm:text-sm relative top-0.5">
                   {movieDetails.vote_average.toFixed(2)}/10{" "}
                   <span className="text-gray-400">
                     ({movieDetails.vote_count})
@@ -358,7 +357,7 @@ const MovieDetails = ({ match }) => {
             )}
           </div>
 
-          <div className="h-[700px] flex flex-col gap-4">
+          <div className="h-[500px] md:h-[700px] flex flex-col gap-4">
             <h1 className="text-gray-400 font-bold text-lg">Related Images</h1>
 
             <div className="carousel-container" style={{ height: "100%" }}>

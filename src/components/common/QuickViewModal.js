@@ -142,11 +142,11 @@ const QuickViewModal = ({ movieId, setIsQuickViewButtonClicked }) => {
                   )}
 
                   {selectedMovieDetails.homepage && (
-                    <div className="flex gap-2">
+                    <div className="flex items-center gap-2">
                       <FaGlobe className="text-gray-400 text-xl" />
 
                       <div className="flex items-center gap-1">
-                        <p className="text-white">Website:</p>
+                        <p className="text-white"></p>
                         <a
                           href={selectedMovieDetails.homepage}
                           target="_blank"

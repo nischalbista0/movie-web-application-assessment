@@ -51,7 +51,10 @@ const Header = () => {
 
             <div className="w-full flex flex-col gap-4">
               <div
-                onClick={() => handleMenuClick("home")}
+                onClick={() => {
+                  handleMenuClick("home");
+                  navigate("/");
+                }}
                 className={`relative flex font-medium items-center gap-4 cursor-pointer ${
                   selected === "home" ? "text-white" : "text-[#919BB4]"
                 } transition-all duration-300`}

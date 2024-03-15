@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { IoClose } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
 
 const FilterModal = ({ onClose }) => {
@@ -94,6 +95,13 @@ const FilterModal = ({ onClose }) => {
 
   return (
     <div className="fixed inset-0 bg-gray-900 overflow-y-auto bg-opacity-95 z-50 p-4 lg:p-6">
+      <button
+        onClick={onClose}
+        className="absolute top-4 right-4 text-3xl text-white transition-all duration-300 hover:text-[#5CA1FF] focus:outline-none"
+      >
+        <IoClose />
+      </button>
+
       <div className="rounded-lg w-full">
         <h2 className="text-2xl font-semibold mb-4">Filters</h2>
 
@@ -104,7 +112,7 @@ const FilterModal = ({ onClose }) => {
             {genres.map((genre) => (
               <div
                 key={genre.id}
-                className={`cursor-pointer rounded-full py-2 px-5 mr-3 mb-4 ${
+                className={`cursor-pointer rounded-full py-1.5 md:py-3 px-3 md:px-5 mr-2 md:mr-3 mb-3 md:mb-4 text-sm md:text-base ${
                   selectedGenres.includes(genre.id)
                     ? "bg-blue-500 text-white"
                     : "bg-gray-200 text-gray-700"
@@ -124,7 +132,7 @@ const FilterModal = ({ onClose }) => {
             {visibleLanguages.map((lang) => (
               <div
                 key={lang.iso_639_1}
-                className={`cursor-pointer rounded-full py-2 px-5 mr-3 mb-4 ${
+                className={`cursor-pointer rounded-full py-1.5 md:py-3 px-3 md:px-5 mr-2 md:mr-3 mb-3 md:mb-4 text-sm md:text-base ${
                   selectedLanguages.includes(lang.iso_639_1)
                     ? "bg-blue-500 text-white"
                     : "bg-gray-200 text-gray-700"
@@ -136,7 +144,7 @@ const FilterModal = ({ onClose }) => {
             ))}
             {!showMoreLanguages && languages.length > 5 && (
               <div
-                className="cursor-pointer rounded-full py-2 px-5 mr-3 mb-4 text-gray-300 border border-gray-500 transition-all duration-300 hover:bg-blue-500 hover:text-white"
+                className="cursor-pointer rounded-full py-1.5 md:py-3 px-3 md:px-5 mr-2 md:mr-3 mb-3 md:mb-4 text-sm md:text-base text-gray-300 border border-gray-500 transition-all duration-300 hover:bg-blue-500 hover:text-white"
                 onClick={() => setShowMoreLanguages(true)}
               >
                 Show More
@@ -144,7 +152,7 @@ const FilterModal = ({ onClose }) => {
             )}
             {showMoreLanguages && (
               <div
-                className="cursor-pointer rounded-full py-2 px-5 mr-3 mb-4 text-gray-300 border border-gray-500 transition-all duration-300 hover:bg-blue-500 hover:text-white"
+                className="cursor-pointer rounded-full py-1.5 md:py-3 px-3 md:px-5 mr-2 md:mr-3 mb-3 md:mb-4 text-sm md:text-base text-gray-300 border border-gray-500 transition-all duration-300 hover:bg-blue-500 hover:text-white"
                 onClick={() => setShowMoreLanguages(false)}
               >
                 Show Less
@@ -153,7 +161,7 @@ const FilterModal = ({ onClose }) => {
           </div>
         </div>
 
-        <div className="flex justify-center mt-8">
+        <div className="flex justify-center mt-8 mb-4">
           <button
             onClick={clearFilters}
             className="bg-gray-300 text-gray-800 py-2 px-4 rounded-full mr-4 transition-all duration-300 hover:bg-gray-400"
