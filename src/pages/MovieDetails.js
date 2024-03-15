@@ -99,7 +99,7 @@ const MovieDetails = ({ match }) => {
 
   return (
     <div className="bg-[#090E12] min-w-screen min-h-screen overflow-x-hidden">
-      <div className="absolute top-0 left-0 w-full h-full">
+      <div className="absolute top-0 left-0 w-full h-screen">
         <img
           src={`https://image.tmdb.org/t/p/w500${movieDetails.backdrop_path}`}
           alt={movieDetails.title}
