@@ -96,7 +96,7 @@ const SearchResultsPage = () => {
       <div className="container mx-auto">
         <Header />
         <div className="px-4 lg:px-6 pb-10">
-          <div className="flex items-center justify-between mb-4">
+          <div className="flex flex-col gap-4 lg:flex-row lg:items-center justify-between mb-4">
             <div className="flex items-center">
               <button
                 onClick={toggleFilterModal} // Toggle filter modal visibility
@@ -106,6 +106,7 @@ const SearchResultsPage = () => {
                 Filter
               </button>
             </div>
+
             <div className="flex items-center">
               <span className="mr-2">Sort by:</span>
               <div className="relative">
@@ -140,7 +141,7 @@ const SearchResultsPage = () => {
           )}
           {!loading && searchResults.length > 0 && (
             <div>
-              <h1 className="text-2xl font-bold mb-4">
+              <h1 className="text-lg sm:text-xl lg:text-2xl font-bold mb-4">
                 Search Results for{" "}
                 <span className="text-[#e2cd59]">"{searchQuery}"</span>
               </h1>

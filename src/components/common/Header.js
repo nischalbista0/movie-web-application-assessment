@@ -44,9 +44,9 @@ const Header = () => {
 
           <div className="flex flex-col items-center gap-10">
             <img
-              src="https://www.freeiconspng.com/thumbs/movie-icon/movie-icon-27.png"
+              src="https://upload.wikimedia.org/wikipedia/commons/7/7b/Movieweb_Logo.png"
               alt="logo"
-              className="w-12 h-12"
+              className="w-36"
             />
 
             <div className="w-full flex flex-col gap-4">
@@ -79,50 +79,33 @@ const Header = () => {
 
                 <div>Upcoming</div>
               </div>
+
+              <div
+                onClick={() => handleMenuClick("TopRated")}
+                className={`relative flex font-medium items-center gap-4 cursor-pointer ${
+                  selected === "TopRated" ? "text-white" : "text-[#919BB4]"
+                } transition-all duration-300`}
+              >
+                <div
+                  className={`w-1.5 h-7 rounded-md bg-[#5CA1FF] ${
+                    selected === "TopRated" ? "opacity-100" : "opacity-0"
+                  } transition-all duration-300`}
+                ></div>
+
+                <div>Top rated</div>
+              </div>
             </div>
           </div>
         </div>
       </div>
 
-      <ul className="items-center gap-10 hidden lg:flex">
-        <li>
-          <div
-            className="text-white cursor-pointer"
-            onClick={() => handleMenuClick("Home")}
-          >
-            Home
-          </div>
-        </li>
-        <li>
-          <div
-            className="text-white cursor-pointer"
-            onClick={() => handleMenuClick("About")}
-          >
-            About
-          </div>
-        </li>
+      <ul className="items-center gap-10 flex">
         <li className="cursor-pointer" onClick={() => navigate("/")}>
           <img
-            src="https://www.freeiconspng.com/thumbs/movie-icon/movie-icon-27.png"
+            src="https://upload.wikimedia.org/wikipedia/commons/7/7b/Movieweb_Logo.png"
             alt="logo"
-            className="w-12 h-12"
+            className="w-36"
           />
-        </li>
-        <li>
-          <div
-            className="text-white cursor-pointer"
-            onClick={() => handleMenuClick("Services")}
-          >
-            Services
-          </div>
-        </li>
-        <li>
-          <div
-            className="text-white cursor-pointer"
-            onClick={() => handleMenuClick("Contact")}
-          >
-            Contact
-          </div>
         </li>
       </ul>
 

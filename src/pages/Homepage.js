@@ -6,15 +6,17 @@ import UpcomingMovies from "../components/Homepage/UpcomingMovies";
 
 const Homepage = () => {
   return (
-    <div className="bg-[#080D11] overflow-x-hidden">
-      <HeroSection />
+    <div className="bg-[#080D11] overflow-x-hidden ">
+      <div>
+        <HeroSection />
 
-      <div className="py-4">
-        <UpcomingMovies />
+        <div className="py-4">
+          <UpcomingMovies />
 
-        <PopularMovies />
+          <PopularMovies />
 
-        <TopRatedMovies />
+          <TopRatedMovies />
+        </div>
       </div>
     </div>
   );

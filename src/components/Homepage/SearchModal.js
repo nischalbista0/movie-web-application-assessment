@@ -115,6 +115,7 @@ const SearchModal = ({
                 <div
                   key={index}
                   className="relative w-full rounded-xl h-80 lg:h-96 cursor-pointer hover:scale-[1.03] transition-all duration-300"
+                  onClick={() => navigate(`/movie/${movie.id}`)}
                 >
                   <img
                     src={`${

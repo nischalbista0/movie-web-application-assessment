@@ -81,7 +81,7 @@ const FilterResultsPage = () => {
       <div className="container mx-auto">
         <Header />
         <div className="px-4 lg:px-6 pb-10">
-          <div className="flex items-center justify-between mb-4">
+          <div className="flex flex-col gap-4 lg:flex-row lg:items-center justify-between mb-4">
             <div className="flex items-center">
               <button
                 onClick={toggleFilterModal}
