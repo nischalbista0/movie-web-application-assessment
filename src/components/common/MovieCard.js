@@ -2,7 +2,7 @@ import { atom, useAtom } from "jotai";
 import React, { useState } from "react";
 import { FaStar } from "react-icons/fa6";
 import { HiInformationCircle } from "react-icons/hi";
-import { IoStatsChart } from "react-icons/io5";
+import { IoStatsChart, IoTimer } from "react-icons/io5";
 import { LuView } from "react-icons/lu";
 import { MdDateRange, MdLanguage } from "react-icons/md";
 
@@ -19,10 +19,8 @@ const MovieCard = ({ movie, type }) => {
     return languageNames.of(code);
   };
 
-  console.log(movie);
-
   return (
-    <div className="relative px-2 lg:px-3">
+    <div className="relative z-0 px-2 lg:px-3">
       <div className="cursor-pointer">
         <div className="flex flex-col gap-2">
           <div
@@ -32,7 +30,7 @@ const MovieCard = ({ movie, type }) => {
           >
             <img
               src={`${
-                movie.poster_path
+                movie.poster_path || movie.poster_path !== null
                   ? `https://image.tmdb.org/t/p/original${movie.poster_path}`
                   : "https://murphys-movies.vercel.app/movie-poster-placeholder.svg"
               }`}
@@ -79,7 +77,10 @@ const MovieCard = ({ movie, type }) => {
 
           <div className="flex flex-col gap-2">
             <h1 className="text-white text-sm sm:text-base font-bold">
-              {movie.title}
+              {movie.title}{" "}
+              <span className="text-gray-400 text-sm">
+                ({movie.release_date.split("-")[0]})
+              </span>
             </h1>
 
             {type === "upcoming" && (
@@ -115,19 +116,24 @@ const MovieCard = ({ movie, type }) => {
             )}
 
             {type === "search" && (
-              <div className="flex items-center gap-2 justify-between">
-                <div className="bg-gray-700 rounded-full px-3 py-0.5 text-xs sm:text-sm font-medium text-white">
-                  <p className="text-xs sm:text-sm relative top-0.5 font-medium text-white">
-                    {movie.release_date.split("-")[0]}
-                  </p>
-                </div>
+              <div>
+                <div className="flex items-center gap-2 justify-between">
+                  <div className="flex items-center gap-2">
+                    <IoTimer className="text-green-600 text-sm sm:text-base" />
 
-                <div className="flex items-center gap-1">
-                  <FaStar className="text-[#FFD700] text-sm sm:text-base" />
+                    <p className="text-white text-xs sm:text-sm relative top-0.5">
+                      {movie.popularity}{" "}
+                      <span className="text-gray-400">points</span>
+                    </p>
+                  </div>
 
-                  <p className="text-white text-xs sm:text-sm relative top-0.5">
-                    {movie.vote_average.toFixed(2)}/10{" "}
-                  </p>
+                  <div className="flex items-center gap-1">
+                    <FaStar className="text-[#FFD700] text-sm sm:text-base" />
+
+                    <p className="text-white text-xs sm:text-sm relative top-0.5">
+                      {movie.vote_average.toFixed(2)}/10{" "}
+                    </p>
+                  </div>
                 </div>
               </div>
             )}

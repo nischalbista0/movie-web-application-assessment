@@ -6,7 +6,7 @@ import { searchClickedAtom } from "../Homepage/HeroSection";
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [selected, setSelected] = useState("Now Showing");
-  const [searchClicked, setSearchClicked] = useAtom(searchClickedAtom);
+  const [, setSearchClicked] = useAtom(searchClickedAtom);
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
@@ -24,14 +24,14 @@ const Header = () => {
       </button>
 
       <div
-        className={`menu-container z-40 absolute left-0 top-0 w-full min-h-screen bg-[#090e12d6] transition-all duration-300 ${
+        className={`menu-container z-[80] fixed left-0 top-0 w-full min-h-screen bg-[#090e12d6] transition-all duration-300 ${
           menuOpen
             ? "opacity-100 pointer-events-auto"
             : "opacity-0 pointer-events-none"
         }`}
       >
         <div
-          className={`absolute left-0 top-0 w-[300px] min-h-screen bg-[#090E12] transition-all duration-300 transform ${
+          className={`absolute z-[80] left-0 top-0 w-[300px] min-h-screen bg-[#090E12] transition-all duration-300 transform ${
             menuOpen ? "translate-x-0" : "-translate-x-full"
           }`}
         >

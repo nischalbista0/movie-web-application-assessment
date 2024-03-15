@@ -10,6 +10,7 @@ const SearchModal = ({
   setSearchResults,
   setLoading,
   searchValue,
+  setSearchValue,
   handleSearchChange,
   searchResults,
   loading,
@@ -19,6 +20,8 @@ const SearchModal = ({
 
   const handleKeyPress = (event) => {
     if (event.key === "Enter") {
+      setSearchResults([]);
+      setSearchValue("");
       setSearchClicked(false);
       navigate(`/search?q=${searchValue}`);
     }

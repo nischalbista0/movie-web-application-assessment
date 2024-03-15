@@ -49,6 +49,7 @@ export default function App() {
           setSearchResults={setSearchResults}
           setLoading={setLoading}
           searchValue={searchValue}
+          setSearchValue={setSearchValue}
           searchClicked={searchClicked}
           handleBackClick={handleBackClick}
           handleSearchChange={handleSearchChange}
